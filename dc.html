@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>owned by @SneaX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            color: #dcddde;
+        }
+
+       
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            height: 100vh;
+            background: rgba(54, 57, 63, 0.8);
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #f7f7f7;
+            background-color: #40444b;
+            color: #ffffff;
+        }
+
+        .message-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #2f3136;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin: 0;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ffffff;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .username {
+            font-weight: bold;
+            color: #ffffff;
+            margin-right: 5px;
+        }
+
+        .timestamp {
+            font-size: 0.65em;
+            color: #b9bbbe;
+        }
+
+        .text {
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .indent {
+            margin-left: 0;
+            margin-top: 2px;
+            line-height: 1.4;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: #636363;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #242424;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="background-video">
+        <source src="background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <h1>*add me @tk3w        </h1>
+
+        <div class="form-container">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username">
+
+            <label for="avatar">Avatar URL</label>
+            <input type="text" id="avatar" placeholder="Enter avatar URL">
+
+            <label for="message">Message</label>
+            <input type="text" id="message" placeholder="Enter your message">
+
+            <button onclick="generateMessage()">Generate Message</button>
+        </div>
+
+        <div id="messages"></div>
+    </div>
+
+    <script>
+        function generateMessage() {
+            const username = document.getElementById('username').value;
+            const avatar = document.getElementById('avatar').value;
+            const message = document.getElementById('message').value;
+
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const isPM = hours >= 12;
+            const formattedTime = `${hours % 12 || 12}:${minutes} ${isPM ? 'PM' : 'AM'}`;
+
+            const timestamp = now.getDate() === new Date().getDate() ? `Today at ${formattedTime}` : `Yesterday at ${formattedTime}`;
+
+            const lastMessage = document.querySelector('#messages .message-container:last-child');
+            if (lastMessage && lastMessage.querySelector('.username').textContent === username) {
+                
+                const indentMessage = document.createElement('div');
+                indentMessage.classList.add('text', 'indent');
+                indentMessage.textContent = message || 'Message text';
+                lastMessage.querySelector('.content').appendChild(indentMessage);
+            } else {
+
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message-container');
+
+                const avatarImg = document.createElement('img');
+                avatarImg.classList.add('avatar');
+                avatarImg.src = avatar || 'https://via.placeholder.com/40';
+                avatarImg.alt = 'Avatar';
+
+                const contentDiv = document.createElement('div');
+                contentDiv.classList.add('content');
+
+                const headerDiv = document.createElement('div');
+                const usernameSpan = document.createElement('span');
+                usernameSpan.classList.add('username');
+                usernameSpan.textContent = username || 'Username';
+
+                const timestampSpan = document.createElement('span');
+                timestampSpan.classList.add('timestamp');
+                timestampSpan.textContent = timestamp;
+
+                headerDiv.appendChild(usernameSpan);
+                headerDiv.appendChild(timestampSpan);
+
+                const messageTextDiv = document.createElement('div');
+                messageTextDiv.classList.add('text');
+                messageTextDiv.textContent = message || 'Message text';
+
+                contentDiv.appendChild(headerDiv);
+                contentDiv.appendChild(messageTextDiv);
+
+                messageContainer.appendChild(avatarImg);
+                messageContainer.appendChild(contentDiv);
+
+                document.getElementById('messages').appendChild(messageContainer);
+            }
+        }
+    </script>
+</body>
+</html>
