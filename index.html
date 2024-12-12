@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>owned by @SneaX</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="owned by @SneaX">
+    <meta property="og:description" content="@SneaX > Discord Custom Messages Gen">
+    <meta property="og:image" content="https://cdn.discordapp.com/attachments/1107238711898406962/1313414578205622342/Mercedes_Benz_AMG.jpg?ex=675be9a5&is=675a9825&hm=3a06d33a1a2b8aaf27005fc43f3ab59fc8192fa5176f197dfcebb7ec5f7a0111&">
+    <meta property="og:url" content="https://wfxw.github.io/xx/">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1107238704445136906/1316885256057651320/image.png?ex=675cac77&is=675b5af7&hm=298437d45fc7f97303652a4f914a6bd71d22672c6928fd47e640dd0113e8300d&" type="image/x-icon">
+
+    <!-- Custom Cursor -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,9 +23,9 @@
             padding: 0;
             overflow: hidden;
             color: #dcddde;
+            cursor: url('http://www.rw-designer.com/cursor-view/62909.png'), auto;
         }
 
-       
         .background-video {
             position: fixed;
             top: 0;
@@ -131,7 +143,7 @@
     </video>
 
     <div class="container">
-        <h1>*add me @tk3w        </h1>
+        <h1>*add me @tk3w</h1>
 
         <div class="form-container">
             <label for="username">Username</label>
@@ -165,13 +177,11 @@
 
             const lastMessage = document.querySelector('#messages .message-container:last-child');
             if (lastMessage && lastMessage.querySelector('.username').textContent === username) {
-                
                 const indentMessage = document.createElement('div');
                 indentMessage.classList.add('text', 'indent');
                 indentMessage.textContent = message || 'Message text';
                 lastMessage.querySelector('.content').appendChild(indentMessage);
             } else {
-
                 const messageContainer = document.createElement('div');
                 messageContainer.classList.add('message-container');
 
